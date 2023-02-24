@@ -22,7 +22,7 @@
         app:hintTextAppearance="@style/commonTextCaption"
         tools:hint="身分證字號">
 
-        <com.example.parking.widget.TextInputEditText
+        <com.example.travel.widget.TextInputEditText
             android:id="@+id/tiet_edit_text"
             style="@style/CommonTextInputEditTextStyle"
             android:layout_width="match_parent"

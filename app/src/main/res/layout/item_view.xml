@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="attr"
+            type="com.example.travel.api.model.ATTR002_Rs" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_radius_4_width_1_cube_blue"
+        android:layout_margin="3dp"
+        tools:ignore="RtlSymmetry">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            app:imageFromUrl="@{attr.images}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/commonTextCaption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:text="@{attr.name}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="板橋火車站" />
+
+        <TextView
+            android:id="@+id/tv_introduction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:maxLines="2"
+            android:text="@{attr.introduction}"
+            android:textColor="@color/color_text_oxford_blue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_name"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="地方媽媽農會013 國泰世華765493749966．歐陽○菲地749966．歐陽○菲地方媽媽農會013 國泰世華765493749966．歐陽○菲" />
+
+        <TextView
+            android:id="@+id/tv_open_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@{attr.open_time}"
+            android:textColor="@color/color_text_oxford_blue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_name"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_introduction"
+            tools:text="地方媽媽農會013 國泰世華765493749966．歐陽○菲" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
