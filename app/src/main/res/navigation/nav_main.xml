@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/entry_fragment">
+
+    <fragment
+        android:id="@+id/entry_fragment"
+        android:name="com.example.travel.main.EntryFragment"
+        tools:layout="@layout/fragment_entry">
+        <action
+            android:id="@+id/action_user_to_detail"
+            app:destination="@id/detail_fragment"
+            app:enterAnim="@animator/card_flip_right_in"
+            app:exitAnim="@animator/card_flip_left_in"
+            app:popEnterAnim="@animator/card_flip_left_in"
+            app:popExitAnim="@animator/card_flip_right_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="com.example.travel.main.DetailFragment"
+        tools:layout="@layout/fragment_detail">
+    </fragment>
+</navigation>

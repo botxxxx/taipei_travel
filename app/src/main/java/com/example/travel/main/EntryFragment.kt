@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel.R
 import com.example.travel.adapters.TravelAdapter
+import com.example.travel.api.NetworkService
 import com.example.travel.api.model.LangType
+import com.example.travel.callback.ChooseLanguageHandler
 import com.example.travel.databinding.FragmentEntryBinding
 import com.example.travel.fragment.BaseViewBindingFragment
 import com.example.travel.utils.DialogUtils
@@ -21,6 +23,7 @@ class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), ChooseLan
     private lateinit var viewModel: EntryViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        NetworkService.init()
         setView()
     }
 
@@ -78,15 +81,7 @@ class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), ChooseLan
         FragmentEntryBinding.inflate(layoutInflater, viewGroup, false)
     }
 
-    companion object {
-        fun newInstance() = EntryFragment()
-    }
-
     override fun onLanguageChoose(langType: LangType) {
         viewModel.languageLiveData.postValue(langType)
     }
-}
-
-interface ChooseLanguageHandler {
-    fun onLanguageChoose(langType: LangType)
 }
