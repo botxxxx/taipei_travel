@@ -1,34 +1,37 @@
 package com.example.travel.adapters
 
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.findViewTreeLifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.travel.R
-import com.example.travel.api.model.ATTR002_Rs
-import com.example.travel.api.model.TCMSV_003_Rs
-import kotlinx.coroutines.launch
-
-@BindingAdapter("chargeItems")
-fun bindRecyclerViewWithDataItemList(recyclerView: RecyclerView, dataItemList: List<ATTR002_Rs>?) {
-    dataItemList?.let {
-        recyclerView.adapter?.apply {
-            when (this) {
-                is TravelAdapter -> submitList(it)
-            }
-        }
-    }
-}
+import com.example.travel.api.data.TCMSV_003_Rs
 
 @BindingAdapter("imageFromUrl")
-fun bindImageFromUrl(view: ImageView, imageUrls: List<TCMSV_003_Rs>?) {
-    if (!imageUrls.isNullOrEmpty()) {
+fun bindImageFromUrl(view: ImageView, imageUrls: TCMSV_003_Rs?) {
+    imageUrls?.let {
         Glide.with(view.context)
-            .load(imageUrls[0].src)
+            .load(imageUrls.src)
             .centerCrop()
             .placeholder(R.drawable.ic_dialogs_bell)
             .into(view)
+    }
+}
+
+@BindingAdapter("isHtml")
+fun bindIsHtml(view: TextView, description: String?) {
+    view.apply {
+        if (description != null) {
+            movementMethod = LinkMovementMethod.getInstance()
+            autoLinkMask = Linkify.WEB_URLS
+            text = Html.fromHtml(description, HtmlCompat.FROM_HTML_MODE_COMPACT)
+            setLinkTextColor(context.getColor(R.color.apple))
+        } else {
+            text = ""
+        }
     }
 }

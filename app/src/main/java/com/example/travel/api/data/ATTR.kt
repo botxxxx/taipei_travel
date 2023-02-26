@@ -1,5 +1,6 @@
-package com.example.travel.api.model
+package com.example.travel.api.data
 
+import com.example.travel.api.model.BaseModel
 import com.google.gson.annotations.SerializedName
 
 data class ATTR001_Rs( //Attractions

@@ -1,9 +1,9 @@
 package com.example.travel.api
 
 import android.util.Log
-import com.example.travel.api.model.ATTR001_Rs
+import com.example.travel.api.data.ATTR001_Rs
 import com.example.travel.api.model.BaseCallBack
-import com.example.travel.api.model.LangType
+import com.example.travel.api.data.LangType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

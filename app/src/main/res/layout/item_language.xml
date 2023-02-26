@@ -9,7 +9,7 @@
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="74dp"
+        android:paddingStart="74dp"
         android:paddingTop="13dp"
         android:paddingBottom="13dp"
         android:textColor="@color/atomic"

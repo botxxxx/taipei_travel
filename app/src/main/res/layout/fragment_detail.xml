@@ -6,200 +6,95 @@
     <data>
 
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
-
-        <!--        <variable-->
-        <!--            name="detail"-->
-        <!--            type="com.example.test.data.details.DetailData" />-->
+            name="attr"
+            type="com.example.travel.api.data.ATTR002_Rs" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp"
-        tools:ignore="UselessParent,HardcodedText,ContentDescription,RtlHardcoded">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="50dp"
+            android:background="@color/dbt_dark_mint"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_header">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:ignore="NestedWeights">
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/close_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentTop="true"
-                    android:onClick="@{clickListener}"
-                    android:src="@drawable/close_b_24px" />
-
-                <RelativeLayout
+                    android:id="@+id/iv_image"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/avatar_url"
-                        android:layout_width="300dp"
-                        android:layout_height="300dp"
-                        android:layout_marginTop="25dp"
-                        android:scaleType="centerCrop" />
-                </RelativeLayout>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:orientation="vertical"
-                tools:ignore="UseCompoundDrawables">
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    app:imageFromUrl="@{attr.images[0]}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/name"
-                    android:layout_width="300dp"
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
                     android:singleLine="true"
-                    android:textAlignment="center"
-                    android:textSize="25sp"
-                    tools:text="{detail.name}" />
+                    android:text="@{attr.name}"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/iv_image"
+                    tools:text="tv_name" />
 
                 <TextView
-                    android:id="@+id/bio"
-                    android:layout_width="300dp"
+                    android:id="@+id/tv_detail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:singleLine="true"
-                    android:textAlignment="center"
-                    android:textSize="25sp"
-                    tools:text="{detail.bio}" />
-            </LinearLayout>
-        </LinearLayout>
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@{attr.introduction}"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:text="tv_detail" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                tools:ignore="UselessParent">
-
-                <ImageView
-                    android:id="@+id/person_url"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_centerVertical="true" />
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_html"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:layout_toRightOf="@+id/person_url"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        tools:text="{detail.login}" />
-
-                    <TextView
-                        android:id="@+id/site_admin"
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:text="staff"
-                        android:textAlignment="center"
-                        android:textAllCaps="true"
-                        android:textColor="@android:color/white"
-                        android:textSize="15sp"
-                        tools:text="app:isAdmin={detail.site_admin}" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                tools:ignore="UselessParent">
-
-                <ImageView
-                    android:id="@+id/location_url"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_centerVertical="true" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:layout_toRightOf="@+id/location_url"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp">
-
-                    <TextView
-                        android:id="@+id/location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        tools:text="{detail.location}" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                tools:ignore="UselessParent">
-
-                <ImageView
-                    android:id="@+id/link_url"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/link_b_24px" />
-
-                <!--                android:src="@drawable/link_b_24px"-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:layout_toRightOf="@+id/link_url"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp">
-
-                    <TextView
-                        android:id="@+id/blog"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        tools:text="isHtml={detail.blog}" />
-                    <!--                        app:isHtml="@{detail.blog}"-->
-                </LinearLayout>
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingVertical="10dp"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"
+                    app:isHtml="@{attr.url}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail"
+                    tools:text="tv_html" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

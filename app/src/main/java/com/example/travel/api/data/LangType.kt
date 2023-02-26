@@ -1,4 +1,4 @@
-package com.example.travel.api.model
+package com.example.travel.api.data
 
 enum class LangType(val lang: String) {
     TW("zh-tw"),

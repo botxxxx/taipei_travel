@@ -6,42 +6,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travel.R
-import com.example.travel.api.model.LangType
+import com.example.travel.api.data.LangType
 import com.example.travel.callback.ChooseLanguageHandler
 import com.example.travel.databinding.ChooseLanguageFragmentBinding
 import com.example.travel.fragment.BaseBottomSheetDialogFragment
 
-/**
- * Created by Ricky on 2021/9/8.<br/>
- * choose bottom sheet dialog fragment<br/>
- * include search and list
- */
-class ChooseLanguageDialog(private val languageHandler: ChooseLanguageHandler) : BaseBottomSheetDialogFragment<ChooseLanguageFragmentBinding>() {
+class ChooseLanguageDialog(private val handler: ChooseLanguageHandler) : BaseBottomSheetDialogFragment<ChooseLanguageFragmentBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.BottomSheetDialogCircle)
-        initView()
+        initView(handler)
         setEvent()
     }
 
-    private fun initView() {
+    private fun initView(handler: ChooseLanguageHandler) {
         val languageList = listOf(
             LangType.TW, LangType.CN, LangType.EN, LangType.JP, LangType.KO, LangType.ES, LangType.ID, LangType.TH, LangType.VI
         )
         binding.rvLanguage.run {
             adapter = ChooseLanguageAdapter(languageList, onItemClick = { langInfo ->
-                languageHandler.onLanguageChoose(langInfo)
+                handler.onLanguageChoose().invoke(langInfo)
                 dialog?.dismiss()
             })
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
                 setDrawable(ColorDrawable(R.drawable.divider_common))
             }
             addItemDecoration(itemDecoration)
         }
+    }
+
+    override fun onDestroyView() {
+        binding.rvLanguage.adapter = null
+        super.onDestroyView()
     }
 
     private fun setEvent() {

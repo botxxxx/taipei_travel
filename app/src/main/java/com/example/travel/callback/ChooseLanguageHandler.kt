@@ -1,7 +1,7 @@
 package com.example.travel.callback
 
-import com.example.travel.api.model.LangType
+import com.example.travel.api.data.LangType
 
 interface ChooseLanguageHandler {
-    fun onLanguageChoose(langType: LangType)
+    fun onLanguageChoose(): (LangType) -> Unit
 }

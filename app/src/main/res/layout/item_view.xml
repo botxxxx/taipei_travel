@@ -7,23 +7,24 @@
 
         <variable
             name="attr"
-            type="com.example.travel.api.model.ATTR002_Rs" />
+            type="com.example.travel.api.data.ATTR002_Rs" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_radius_4_width_1_cube_blue"
         android:layout_margin="3dp"
+        android:background="@drawable/shape_radius_4_width_1_cube_blue"
         tools:ignore="RtlSymmetry">
 
         <ImageView
             android:id="@+id/iv_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             android:layout_margin="5dp"
-            app:imageFromUrl="@{attr.images}"
+            android:scaleType="centerCrop"
+            app:imageFromUrl="@{attr.images[0]}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

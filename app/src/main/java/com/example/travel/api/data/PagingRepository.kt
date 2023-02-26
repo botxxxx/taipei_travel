@@ -1,4 +1,4 @@
-package com.example.travel.api.model
+package com.example.travel.api.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -7,9 +7,7 @@ import com.example.travel.api.ApiService
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PagingRepository @Inject constructor(
-    private val service: ApiService
-) {
+class PagingRepository @Inject constructor(private val service: ApiService) {
 
     fun getSearchAttr(langType: LangType): Flow<PagingData<ATTR002_Rs>> {
         return Pager(

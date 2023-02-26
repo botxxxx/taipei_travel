@@ -6,12 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel.R
-import com.example.travel.api.model.LangType
+import com.example.travel.api.data.LangType
 
-/**
- * Author: Tom
- * usage: adapter for select transfer branch
- */
 class ChooseLanguageAdapter(private var langList: List<LangType>, private val onItemClick: (LangType) -> Unit) :
     RecyclerView.Adapter<ChooseLanguageAdapter.ViewHolder>() {
 

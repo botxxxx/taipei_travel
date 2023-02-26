@@ -1,6 +1,6 @@
 package com.example.travel.api
 
-import com.example.travel.api.model.ATTR001_Rs
+import com.example.travel.api.data.ATTR001_Rs
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level

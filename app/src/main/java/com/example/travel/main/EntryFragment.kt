@@ -4,23 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.example.travel.R
 import com.example.travel.adapters.TravelAdapter
 import com.example.travel.api.NetworkService
-import com.example.travel.api.model.LangType
+import com.example.travel.api.data.ATTR002_Rs
+import com.example.travel.api.data.LangType
 import com.example.travel.callback.ChooseLanguageHandler
+import com.example.travel.callback.EntryNavigateHandler
 import com.example.travel.databinding.FragmentEntryBinding
 import com.example.travel.fragment.BaseViewBindingFragment
 import com.example.travel.utils.DialogUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
-class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), ChooseLanguageHandler {
+class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), EntryNavigateHandler, ChooseLanguageHandler {
 
-    private lateinit var viewModel: EntryViewModel
+    private val viewModel: EntryViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         NetworkService.init()
@@ -36,8 +35,8 @@ class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), ChooseLan
             ChooseLanguageDialog(this).show(this.parentFragmentManager, null)
         }
 
-        viewModel = ViewModelProvider(this@EntryFragment)[EntryViewModel::class.java].apply {
-            chargeLiveData.observe(viewLifecycleOwner) {
+        viewModel.apply {
+            onSuccessLiveData.observe(viewLifecycleOwner) {
                 it?.let {
                     (binding.rvList.adapter as TravelAdapter).submitList(it.data)
                     clearResponse()
@@ -54,12 +53,7 @@ class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), ChooseLan
                     getAttractionsList(it, this@EntryFragment)
                 }
             }
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            delay(1000)
             viewModel.languageLiveData.postValue(LangType.TW)
-            ChooseLanguageDialog(this@EntryFragment).show(parentFragmentManager, null)
         }
     }
 
@@ -81,7 +75,12 @@ class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), ChooseLan
         FragmentEntryBinding.inflate(layoutInflater, viewGroup, false)
     }
 
-    override fun onLanguageChoose(langType: LangType) {
-        viewModel.languageLiveData.postValue(langType)
+    override fun navigateToDetail(item: ATTR002_Rs?, view: View) {
+        val direction = EntryFragmentDirections.actionToDetail(item)
+        view.findNavController().navigate(direction)
+    }
+
+    override fun onLanguageChoose(): (LangType) -> Unit = {
+        viewModel.languageLiveData.postValue(it)
     }
 }

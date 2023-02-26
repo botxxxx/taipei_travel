@@ -1,10 +1,10 @@
 package com.example.travel.adapters
 
+import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.DiffUtil
-import com.example.travel.R
-import com.example.travel.api.model.ATTR002_Rs
+import com.example.travel.api.data.ATTR002_Rs
 import com.example.travel.databinding.ItemViewBinding
-import com.example.travel.utils.DialogUtils
+import com.example.travel.main.EntryFragment
 
 class TravelAdapter : BaseDataBindingAdapter<ATTR002_Rs>(ChargeDiffCallback()) {
 
@@ -14,15 +14,8 @@ class TravelAdapter : BaseDataBindingAdapter<ATTR002_Rs>(ChargeDiffCallback()) {
 
     private class TravelViewHolder<T>(binding: ItemViewBinding) : BaseDataBindingViewHolder<T>(binding) {
         init {
-            binding.root.apply {
-                setOnClickListener {
-                    DialogUtils.showNormalAlert(
-                        context = context,
-                        title = resources.getString(R.string.common_text_error_msg),
-                        msg = resources.getString(R.string.common_login_failure),
-                        rightButtonText = resources.getString(R.string.common_text_i_know_it),
-                    )
-                }
+            binding.root.setOnClickListener {
+                itemView.findFragment<EntryFragment>().navigateToDetail(binding.attr, it)
             }
         }
     }

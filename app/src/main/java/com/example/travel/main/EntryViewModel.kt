@@ -4,19 +4,22 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.travel.api.NetworkService
-import com.example.travel.api.model.ATTR001_Rs
+import com.example.travel.api.data.ATTR001_Rs
+import com.example.travel.api.data.LangType
 import com.example.travel.api.model.BaseCallBack
 import com.example.travel.api.model.BaseModel
-import com.example.travel.api.model.LangType
 import com.example.travel.callback.BaseViewInterface
 import com.example.travel.utils.Loading
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EntryViewModel : ViewModel() {
+@HiltViewModel
+class EntryViewModel @Inject constructor() : ViewModel() {
     val languageLiveData: MutableLiveData<LangType?> = MutableLiveData()
-    val chargeLiveData: MutableLiveData<ATTR001_Rs?> = MutableLiveData()
+    val onSuccessLiveData: MutableLiveData<ATTR001_Rs?> = MutableLiveData()
     val onFailureLiveData: MutableLiveData<BaseModel?> = MutableLiveData()
     fun clearResponse() {
-        chargeLiveData.value = null
+        onSuccessLiveData.value = null
         onFailureLiveData.value = null
         Loading.hide()
     }
@@ -28,7 +31,7 @@ class EntryViewModel : ViewModel() {
         NetworkService.loadAttractions(langType, object : BaseCallBack<ATTR001_Rs>(baseViewInterface) {
             override fun onResponse(response: ATTR001_Rs) {
                 Log.e("response", "success")
-                chargeLiveData.postValue(response)
+                onSuccessLiveData.postValue(response)
             }
 
             override fun onFailure() {
