@@ -9,7 +9,7 @@ plugins {
 
 static def getVersionCode() { return 1 }
 
-static def getVersionName() { return "0.0.1" + new Date().format('MMddHH') }
+static def getVersionName() { return "1.0.1" + new Date().format('MMddHH') }
 
 android {
     namespace 'com.example.travel'
