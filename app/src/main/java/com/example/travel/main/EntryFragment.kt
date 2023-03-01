@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.travel.R
 import com.example.travel.adapters.TravelAdapter
-import com.example.travel.api.NetworkService
 import com.example.travel.api.data.ATTR002_Rs
 import com.example.travel.api.data.LangType
 import com.example.travel.callback.ChooseLanguageHandler
@@ -16,13 +16,18 @@ import com.example.travel.callback.EntryNavigateHandler
 import com.example.travel.databinding.FragmentEntryBinding
 import com.example.travel.fragment.BaseViewBindingFragment
 import com.example.travel.utils.DialogUtils
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), EntryNavigateHandler, ChooseLanguageHandler {
 
     private val viewModel: EntryViewModel by viewModels()
+    private var searchJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        NetworkService.init()
         setView()
     }
 
@@ -36,21 +41,20 @@ class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), EntryNavi
         }
 
         viewModel.apply {
-            onSuccessLiveData.observe(viewLifecycleOwner) {
-                it?.let {
-                    (binding.rvList.adapter as TravelAdapter).submitList(it.data)
-                    clearResponse()
-                }
-            }
             onFailureLiveData.observe(viewLifecycleOwner) {
                 it?.let {
                     onError()
                     clearResponse()
                 }
             }
-            languageLiveData.observe(viewLifecycleOwner) {
-                it?.let {
-                    getAttractionsList(it, this@EntryFragment)
+            languageLiveData.observe(viewLifecycleOwner) { lang ->
+                lang?.let { _ ->
+                    searchJob?.cancel()
+                    searchJob = lifecycleScope.launch {
+                        viewModel.getResult(lang).collectLatest {
+                            (binding.rvList.adapter as TravelAdapter).submitData(it)
+                        }
+                    }
                 }
             }
             viewModel.languageLiveData.postValue(LangType.TW)

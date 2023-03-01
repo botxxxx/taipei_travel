@@ -5,7 +5,8 @@ import androidx.paging.PagingSource.LoadResult.Page
 import androidx.paging.PagingState
 import com.example.travel.api.ApiService
 
-class AttrPagingSource(private val service: ApiService, private val langType: LangType) : PagingSource<Int, ATTR002_Rs>() {
+class AttrPagingSource(private val service: ApiService, private val langType: LangType) :
+    PagingSource<Int, ATTR002_Rs>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ATTR002_Rs> {
         val page = params.key ?: UNSPLASH_STARTING_PAGE_INDEX

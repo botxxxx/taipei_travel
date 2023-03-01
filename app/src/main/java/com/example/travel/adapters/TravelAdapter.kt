@@ -6,7 +6,7 @@ import com.example.travel.api.data.ATTR002_Rs
 import com.example.travel.databinding.ItemViewBinding
 import com.example.travel.main.EntryFragment
 
-class TravelAdapter : BaseDataBindingAdapter<ATTR002_Rs>(ChargeDiffCallback()) {
+class TravelAdapter : BasePageBindingAdapter<ATTR002_Rs>(ChargeDiffCallback()) {
 
     override fun setViewHolder(binding: ItemViewBinding): BaseDataBindingViewHolder<ATTR002_Rs> {
         return TravelViewHolder(binding)
