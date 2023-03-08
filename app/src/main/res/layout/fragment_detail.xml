@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:scaleType="centerCrop"
-                    app:imageFromUrl="@{attr.images[0]}"
+                    app:imageFromUrl="@{attr.images[0].src}"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
 

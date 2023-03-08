@@ -24,7 +24,7 @@
             android:layout_height="160dp"
             android:layout_margin="5dp"
             android:scaleType="centerCrop"
-            app:imageFromUrl="@{attr.images[0]}"
+            app:imageFromUrl="@{attr.images[0].src}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

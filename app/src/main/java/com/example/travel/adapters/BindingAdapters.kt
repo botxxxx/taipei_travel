@@ -9,13 +9,12 @@ import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.travel.R
-import com.example.travel.api.data.TCMSV_003_Rs
 
 @BindingAdapter("imageFromUrl")
-fun bindImageFromUrl(view: ImageView, imageUrls: TCMSV_003_Rs?) {
+fun bindImageFromUrl(view: ImageView, imageUrls: String?) {
     imageUrls?.let {
         Glide.with(view.context)
-            .load(imageUrls.src)
+            .load(imageUrls)
             .centerCrop()
             .placeholder(R.drawable.ic_dialogs_bell)
             .into(view)
