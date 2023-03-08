@@ -51,7 +51,7 @@ class EntryFragment : BaseViewBindingFragment<FragmentEntryBinding>(), EntryNavi
                 lang?.let { _ ->
                     searchJob?.cancel()
                     searchJob = lifecycleScope.launch {
-                        viewModel.getResult(lang).collectLatest {
+                        viewModel.fetchList(lang).collectLatest {
                             (binding.rvList.adapter as TravelAdapter).submitData(it)
                         }
                     }

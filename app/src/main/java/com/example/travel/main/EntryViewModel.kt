@@ -25,7 +25,7 @@ class EntryViewModel @Inject constructor(
         Loading.hide()
     }
 
-    fun getResult(langType: LangType): Flow<PagingData<ATTR002_Rs>> {
+    fun fetchList(langType: LangType): Flow<PagingData<ATTR002_Rs>> {
         return entryRepository.getSearchAttr(langType).cachedIn(viewModelScope)
     }
 }

@@ -17,21 +17,4 @@ interface ApiService {
         @Path("lang") lang: String = "zh-tw",
         @Query("page") page: Int? = 1,
     ): ATTR001_Rs
-
-    companion object {
-        private const val BASE_URL = "https://www.travel.taipei"
-        fun create(): ApiService {
-            val logger = HttpLoggingInterceptor().apply { level = Level.BASIC }
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .retryOnConnectionFailure(true)
-                .build()
-            return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiService::class.java)
-        }
-    }
 }
