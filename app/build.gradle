@@ -13,17 +13,13 @@ apply from: '../dependencies.gradle'
 android {
     namespace v.applicationId
     compileSdk v.compileSdk
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     defaultConfig {
         applicationId v.applicationId
         minSdk v.minSdk
         targetSdk v.compileSdk
         versionCode v.versionCode
         versionName v.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner v.testRunner
     }
     buildTypes {
         release {
@@ -38,6 +34,10 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion v.composeCompiler
+    }
+    compileOptions {
+        sourceCompatibility v.javaVersion
+        targetCompatibility v.javaVersion
     }
     kotlinOptions {
         jvmTarget = v.jvmTarget
